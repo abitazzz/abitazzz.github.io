@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WattQuest - Energía Inteligente | Plataforma Promocional</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0078FF',
+                            cyan: '#00C6FF',
+                            teal: '#00E5A3',
+                            navy: '#0B132B',
+                            dark: '#1C2541'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F7FC;
+            color: #1C2541;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0078FF 0%, #00C6FF 50%, #00E5A3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #0078FF 0%, #00C6FF 100%);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 10px 25px rgba(0, 120, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 30px rgba(0, 120, 255, 0.08);
+        }
+
+        /* Glassmorphic elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Tab Transition */
+        .tab-pane {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 300px;
+            transition: max-height 0.35s cubic-bezier(1, 0, 1, 0);
+        }
+
+        .accordion-item.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full gradient-btn flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-blue-500/30">
+                    W
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl text-brand-navy tracking-tight block leading-none">Watt<span class="text-brand-cyan">Quest</span></span>
+                    <span class="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">Energía Inteligente</span>
+                </div>
+            </a>
+
+            <!-- NAV LINKS -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="switchTab('quienes')" class="nav-tab-link hover:text-brand-blue transition">¿Quiénes Somos?</button>
+                <button onclick="switchTab('deque')" class="nav-tab-link hover:text-brand-blue transition">¿De qué Trata?</button>
+                <button onclick="switchTab('informes')" class="nav-tab-link hover:text-brand-blue transition">Informes & Métricas</button>
+                <button onclick="switchTab('faq')" class="nav-tab-link hover:text-brand-blue transition">Preguntas Frecuentes</button>
+            </nav>
+
+            <!-- CTA -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openModal('modal-demo')" class="gradient-btn text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-full shadow-md">
+                    Probar Demo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- HERO TEXT -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Plataforma IoT de Eficiencia Energética</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl font-black text-brand-navy leading-tight">
+                    Conoce tu energía, <span class="gradient-text">transforma tus hábitos.</span>
+                </h1>
+
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
+                    WattQuest monitorea en tiempo real el consumo eléctrico de tu hogar u oficina en <strong>kWh y Soles (S/)</strong>. Identifica consumos vampiro y reduce hasta un 30% en tu factura de luz.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <button onclick="switchTab('informes')" class="gradient-btn text-white font-bold text-sm px-7 py-3.5 rounded-full shadow-lg w-full sm:w-auto">
+                        Explorar Métricas en Vivo
+                    </button>
+                    <button onclick="openModal('modal-reporte-general')" class="bg-white text-brand-navy border border-slate-200 font-bold text-sm px-6 py-3.5 rounded-full hover:border-brand-blue hover:text-brand-blue transition w-full sm:w-auto shadow-sm">
+                        <i class="fa-solid fa-file-invoice text-brand-cyan mr-2"></i>Ver Informe Ejecutivo
+                    </button>
+                </div>
+            </div>
+
+            <!-- HERO INTERACTIVE WIDGET -->
+            <div class="lg:col-span-5">
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 card-shadow space-y-5">
+                    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-brand-blue"></i>
+                            <span class="font-bold text-sm text-brand-navy">Simulador de Ahorro Rápido</span>
+                        </div>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-0.5 rounded-full">Soles S/</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Selecciona Inmueble</label>
+                        <select id="property-type" onchange="updateSavingCalculator()" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                            <option value="depa">Departamento (1-2 habitaciones)</option>
+                            <option value="familiar" selected>Casa Familiar (3-4 habitaciones)</option>
+                            <option value="oficina">Oficina o Local Comercial</option>
+                        </select>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-brand-navy to-brand-dark text-white space-y-2 text-center">
+                        <span class="text-xs text-slate-400 font-semibold uppercase block">Ahorro Mensual Estimado</span>
+                        <div id="saving-amount" class="text-3xl font-black text-brand-teal">S/ 42.00 / mes</div>
+                        <p id="saving-detail" class="text-xs text-slate-300">Eliminando consumo standby en TV, Laptop y Luces.</p>
+                    </div>
+
+                    <button onclick="openModal('modal-demo')" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-brand-navy font-bold text-xs rounded-xl transition">
+                        Solicitar Estudio Personalizado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN INTERACTIVE CONTAINER WITH TABS -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow" id="seccion-interactiva">
+        
+        <!-- TAB BUTTONS HEADER -->
+        <div class="bg-slate-200/80 p-1.5 rounded-2xl flex flex-wrap sm:flex-nowrap justify-between gap-1 max-w-4xl mx-auto mb-8 card-shadow">
+            <button onclick="switchTab('quienes')" id="btn-tab-quienes" class="tab-btn-selector flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-users"></i>
+                <span>¿Quiénes Somos?</span>
+            </button>
+            <button onclick="switchTab('deque')" id="btn-tab-deque" class="tab-btn-selector flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>¿De qué Trata?</span>
+            </button>
+            <button onclick="switchTab('informes')" id="btn-tab-informes" class="tab-btn-selector flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Informes & Métricas</span>
+            </button>
+            <button onclick="switchTab('faq')" id="btn-tab-faq" class="tab-btn-selector flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-600 transition flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Preguntas Frecuentes</span>
+            </button>
+        </div>
+
+        <!-- TAB CONTENT 1: QUIÉNES SOMOS -->
+        <div id="tab-quienes" class="tab-pane active bg-white p-8 rounded-3xl border border-slate-100 card-shadow space-y-6">
+            <div class="max-w-3xl">
+                <h2 class="text-2xl font-bold text-brand-navy mb-3">Quiénes Somos</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Somos una iniciativa tecnológica dedicada al desarrollo de soluciones IoT y software para la optimización y eficiencia energética doméstica y corporativa.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                <div class="p-5 rounded-2xl bg-blue-50/60 border border-blue-100 space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center text-lg font-bold mb-3">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-brand-navy">Misión</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Empoderar a las personas mediante visibilidad total de sus consumos eléctricos para transformar sus hábitos cotidianos.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-100 space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg font-bold mb-3">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="font-bold text-brand-navy">Visión</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Convertirnos en la plataforma referente de gestión eco-inteligente de energía en la región, reduciendo la huella de carbono.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-cyan-50/60 border border-cyan-100 space-y-2">
+                    <div class="w-10 h-10 rounded-xl bg-brand-cyan text-white flex items-center justify-center text-lg font-bold mb-3">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="font-bold text-brand-navy">Para tu Hogar</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Plataforma configurable para el monitoreo inteligente y optimización de consumo continuo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 2: DE QUÉ TRATA -->
+        <div id="tab-deque" class="tab-pane bg-white p-8 rounded-3xl border border-slate-100 card-shadow space-y-6">
+            <div class="max-w-3xl">
+                <h2 class="text-2xl font-bold text-brand-navy mb-3">¿De qué Trata WattQuest?</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Es un ecosistema integral que conecta hardware de medición IoT con dashboards en tiempo real, permitiéndote tomar decisiones informadas sobre tu consumo eléctrico.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-blue transition">
+                    <span class="text-xs font-extrabold text-brand-blue uppercase tracking-wider block mb-2">01. Conexión</span>
+                    <h4 class="font-bold text-slate-800 text-sm mb-1">Vinculación IoT</h4>
+                    <p class="text-xs text-slate-500">Conecta tus equipos mediante enchufes inteligentes en 3 pasos.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-blue transition">
+                    <span class="text-xs font-extrabold text-brand-blue uppercase tracking-wider block mb-2">02. Lectura</span>
+                    <h4 class="font-bold text-slate-800 text-sm mb-1">Conversión a Soles (S/)</h4>
+                    <p class="text-xs text-slate-500">Traduce Watts y kWh a dinero real pagado por hora o día.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-blue transition">
+                    <span class="text-xs font-extrabold text-brand-blue uppercase tracking-wider block mb-2">03. Alertas</span>
+                    <h4 class="font-bold text-slate-800 text-sm mb-1">Detección Vampiro</h4>
+                    <p class="text-xs text-slate-500">Notifica sobre televisores o laptops en standby que gastan electricidad.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-blue transition">
+                    <span class="text-xs font-extrabold text-brand-blue uppercase tracking-wider block mb-2">04. Organización</span>
+                    <h4 class="font-bold text-slate-800 text-sm mb-1">Gestión por Ambientes</h4>
+                    <p class="text-xs text-slate-500">Separa el consumo entre Cocina, Dormitorios y Sala.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: INFORMES Y MÉTRICAS -->
+        <div id="tab-informes" class="tab-pane bg-white p-8 rounded-3xl border border-slate-100 card-shadow space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-brand-navy">Informes y Reportes Disponibles</h2>
+                    <p class="text-xs text-slate-500">Reportes interactivos y análisis en tiempo real</p>
+                </div>
+                <button onclick="openModal('modal-reporte-general')" class="gradient-btn text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-sm">
+                    Abrir Informe General PDF
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Report Card 1 -->
+                <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-brand-blue uppercase">WF-05</span>
+                            <span class="p-1.5 bg-blue-100 text-brand-blue rounded-lg text-xs"><i class="fa-solid fa-coins"></i></span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-1">Proyección de Costos</h4>
+                        <p class="text-xs text-slate-500 mb-4">Muestra la estimación de gasto en Soles (S/) para el cierre del mes actual.</p>
+                    </div>
+                    <button onclick="openModal('modal-reporte-costos')" class="w-full py-2 bg-white border border-slate-200 text-brand-navy hover:text-brand-blue font-bold text-xs rounded-xl transition">
+                        Ver Detalle de Costos
+                    </button>
+                </div>
+
+                <!-- Report Card 2 -->
+                <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-emerald-600 uppercase">WF-10</span>
+                            <span class="p-1.5 bg-emerald-100 text-emerald-600 rounded-lg text-xs"><i class="fa-solid fa-door-open"></i></span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-1">Consumo por Ambientes</h4>
+                        <p class="text-xs text-slate-500 mb-4">Desglose porcentual del gasto por Cocina, Sala y Dormitorios.</p>
+                    </div>
+                    <button onclick="openModal('modal-reporte-ambientes')" class="w-full py-2 bg-white border border-slate-200 text-brand-navy hover:text-emerald-600 font-bold text-xs rounded-xl transition">
+                        Ver Reporte por Ambiente
+                    </button>
+                </div>
+
+                <!-- Report Card 3 -->
+                <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-amber-600 uppercase">WF-06</span>
+                            <span class="p-1.5 bg-amber-100 text-amber-600 rounded-lg text-xs"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-1">Alertas y Fugas</h4>
+                        <p class="text-xs text-slate-500 mb-4">Registro de anomalías, picos imprevistos y consumo fantasma.</p>
+                    </div>
+                    <button onclick="openModal('modal-reporte-alertas')" class="w-full py-2 bg-white border border-slate-200 text-brand-navy hover:text-amber-600 font-bold text-xs rounded-xl transition">
+                        Ver Registro de Alertas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 4: FAQ ACCORDION -->
+        <div id="tab-faq" class="tab-pane bg-white p-8 rounded-3xl border border-slate-100 card-shadow space-y-6">
+            <h2 class="text-2xl font-bold text-brand-navy mb-4">Preguntas Frecuentes</h2>
+
+            <div class="space-y-4 max-w-4xl" id="faq-accordion">
+                
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item border border-slate-200 rounded-2xl overflow-hidden transition">
+                    <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-bold text-slate-800 text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition">
+                        <span>¿Cómo calcula WattQuest el consumo en Soles (S/)?</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon text-slate-400 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content bg-white px-5 text-xs text-slate-600 leading-relaxed">
+                        <div class="py-4">
+                            El sistema toma la potencia en Watts registrada por los dispositivos IoT, calcula los kWh consumidos por hora y aplica la tarifa local por kWh (aprox. S/ 0.68) permitiendo reflejar montos exactos en Soles.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item border border-slate-200 rounded-2xl overflow-hidden transition">
+                    <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-bold text-slate-800 text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition">
+                        <span>¿Es fácil vincular un nuevo dispositivo IoT?</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon text-slate-400 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content bg-white px-5 text-xs text-slate-600 leading-relaxed">
+                        <div class="py-4">
+                            Sí. Basta con acceder al módulo de Monitoreo, pulsar "Vincular Dispositivo", ingresar el nombre, wattage nominal y ambiente. El emparejamiento toma menos de 1 minuto.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item border border-slate-200 rounded-2xl overflow-hidden transition">
+                    <button onclick="toggleAccordion(this)" class="w-full p-5 text-left font-bold text-slate-800 text-sm flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition">
+                        <span>¿Qué es el Consumo Vampiro y cómo me ayuda a combatirlo?</span>
+                        <i class="fa-solid fa-chevron-down accordion-icon text-slate-400 transition-transform"></i>
+                    </button>
+                    <div class="accordion-content bg-white px-5 text-xs text-slate-600 leading-relaxed">
+                        <div class="py-4">
+                            Es la energía consumida por aparatos conectados pero apagados (en standby). WattQuest detecta estas pequeñas fugas de 3W a 15W continuas y te sugiere reglas automáticas para desconectarlos.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-navy text-white pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <div class="flex items-center justify-center md:justify-start space-x-2">
+                    <span class="font-extrabold text-lg text-white">Watt<span class="text-brand-cyan">Quest</span></span>
+                    <span class="text-xs bg-brand-blue/30 text-brand-cyan font-bold px-2 py-0.5 rounded-full">v2.4</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">Energía Inteligente — Conoce tu energía, transforma tus hábitos.</p>
+            </div>
+
+            <div class="text-xs text-slate-400">
+                Plataforma interactiva promocional de gestión energética
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL 1: DEMO / REGISTRO -->
+    <div id="modal-demo" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-lg text-brand-navy">Solicitar Demo de WattQuest</h3>
+                <button onclick="closeModal('modal-demo')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <form onsubmit="event.preventDefault(); alert('¡Gracias por tu interés! Nos pondremos en contacto a la brevedad.'); closeModal('modal-demo');" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-500 uppercase mb-1">Nombre Solicitante</label>
+                    <input type="text" placeholder="Ingresa tu nombre completo" required class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-800 font-semibold">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-500 uppercase mb-1">Correo Electrónico</label>
+                    <input type="email" placeholder="correo@ejemplo.com" required class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-800">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-500 uppercase mb-1">Teléfono de Contacto</label>
+                    <input type="tel" placeholder="+51 987 654 321" required class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-800">
+                </div>
+                <div class="pt-2 flex space-x-3">
+                    <button type="button" onclick="closeModal('modal-demo')" class="w-1/2 py-3 bg-slate-100 text-slate-600 font-bold rounded-xl">Cancelar</button>
+                    <button type="submit" class="w-1/2 py-3 gradient-btn text-white font-bold rounded-xl shadow-md">Enviar Solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: REPORTE GENERAL EXECUTIVE -->
+    <div id="modal-reporte-general" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-lg text-brand-navy"><i class="fa-solid fa-file-invoice text-brand-blue mr-2"></i>Informe Ejecutivo de Consumo</h3>
+                <button onclick="closeModal('modal-reporte-general')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <div class="space-y-3 text-xs text-slate-600">
+                <div class="flex justify-between p-3 bg-slate-50 rounded-xl">
+                    <span>Estado del Sistema:</span>
+                    <strong class="text-brand-navy">Monitoreo Activo</strong>
+                </div>
+                <div class="flex justify-between p-3 bg-slate-50 rounded-xl">
+                    <span>Consumo Mensual Proyectado:</span>
+                    <strong class="text-brand-blue">140 kWh (S/ 95.00)</strong>
+                </div>
+                <div class="flex justify-between p-3 bg-slate-50 rounded-xl">
+                    <span>Dispositivos bajo monitoreo:</span>
+                    <strong class="text-slate-800">5 activos</strong>
+                </div>
+                <div class="p-3 bg-emerald-50 text-emerald-800 rounded-xl font-medium">
+                    <i class="fa-solid fa-leaf mr-1"></i> Potencial de ahorro mensual identificado: <strong>S/ 11.00</strong> mediante desactivación automática de Standby.
+                </div>
+            </div>
+
+            <button onclick="closeModal('modal-reporte-general')" class="w-full py-3 bg-slate-800 text-white font-bold text-xs rounded-xl">Cerrar Informe</button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: REPORTE COSTOS -->
+    <div id="modal-reporte-costos" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-base text-brand-navy">Detalle de Costos (S/)</h3>
+                <button onclick="closeModal('modal-reporte-costos')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between py-1.5 border-b border-slate-100">
+                    <span>Refrigeradora (120W)</span>
+                    <span class="font-bold text-slate-800">S/ 1.95 / día</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-slate-100">
+                    <span>Laptop Trabajo (45W)</span>
+                    <span class="font-bold text-slate-800">S/ 0.73 / día</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-slate-100">
+                    <span>TV Sala (Standby 3W)</span>
+                    <span class="font-bold text-amber-600">S/ 0.05 / día</span>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-reporte-costos')" class="w-full py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Entendido</button>
+        </div>
+    </div>
+
+    <!-- MODAL 4: REPORTE AMBIENTES -->
+    <div id="modal-reporte-ambientes" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-base text-brand-navy">Desglose por Ambientes</h3>
+                <button onclick="closeModal('modal-reporte-ambientes')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <div class="flex justify-between font-bold mb-1">
+                        <span>Cocina</span>
+                        <span>60% del consumo</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-brand-blue h-full w-[60%] rounded-full"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between font-bold mb-1">
+                        <span>Dormitorio Principal</span>
+                        <span>30% del consumo</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-emerald-500 h-full w-[30%] rounded-full"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between font-bold mb-1">
+                        <span>Sala</span>
+                        <span>10% del consumo</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full"><div class="bg-brand-cyan h-full w-[10%] rounded-full"></div></div>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-reporte-ambientes')" class="w-full py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: REPORTE ALERTAS Y FUGAS -->
+    <div id="modal-reporte-alertas" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-base text-brand-navy">Registro de Alertas y Fugas</h3>
+                <button onclick="closeModal('modal-reporte-alertas')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-2.5 text-xs">
+                <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900">
+                    <div class="font-bold"><i class="fa-solid fa-bolt mr-1"></i> Consumo Vampiro Detectado</div>
+                    <p class="text-amber-700 mt-0.5">TV Sala en modo espera continuo (3.2W) durante 14 horas.</p>
+                </div>
+                <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-brand-navy">
+                    <div class="font-bold"><i class="fa-solid fa-circle-info mr-1"></i> Pico de Demanda Nocturno</div>
+                    <p class="text-slate-600 mt-0.5">Incremento de 18% en Cocina entre 20:00 y 21:30 hrs.</p>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-reporte-alertas')" class="w-full py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT INTERACTIVO -->
+    <script>
+        // Cambio de pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+
+            document.querySelectorAll('.tab-btn-selector').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-brand-blue', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+
+            const targetPane = document.getElementById('tab-' + tabId);
+            if (targetPane) targetPane.classList.add('active');
+
+            const activeBtn = document.getElementById('btn-tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-white', 'text-brand-blue', 'shadow-sm');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            const seccion = document.getElementById('seccion-interactiva');
+            if (seccion) {
+                seccion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Simulador de ahorro rápido
+        function updateSavingCalculator() {
+            const type = document.getElementById('property-type').value;
+            const amountEl = document.getElementById('saving-amount');
+            const detailEl = document.getElementById('saving-detail');
+
+            const data = {
+                depa: {
+                    amount: 'S/ 24.50 / mes',
+                    detail: 'Optimizando cargadores, router y luces en ambientes.'
+                },
+                familiar: {
+                    amount: 'S/ 42.00 / mes',
+                    detail: 'Eliminando consumo standby en TV, Laptop y Luces.'
+                },
+                oficina: {
+                    amount: 'S/ 118.00 / mes',
+                    detail: 'Apagado programado de monitores, impresoras y aire.'
+                }
+            };
+
+            if (data[type]) {
+                amountEl.textContent = data[type].amount;
+                detailEl.textContent = data[type].detail;
+            }
+        }
+
+        // Acordeón FAQ
+        function toggleAccordion(button) {
+            const item = button.closest('.accordion-item');
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('open');
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // Modales
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // Cerrar modal al hacer clic fuera del cuadro blanco
+        window.addEventListener('click', (e) => {
+            if (e.target.id && e.target.id.startsWith('modal-')) {
+                e.target.classList.add('hidden');
+            }
+        });
+
+        // Inicializar pestaña activa por defecto
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('quienes');
+        });
+    </script>
+
+</body>
+</html>
