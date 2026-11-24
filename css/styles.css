@@ -1,0 +1,59 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #F4F7FC;
+    color: #1C2541;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #0078FF 0%, #00C6FF 50%, #00E5A3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-btn {
+    background: linear-gradient(135deg, #0078FF 0%, #00C6FF 100%);
+    transition: all 0.3s ease;
+}
+
+.gradient-btn:hover {
+    box-shadow: 0 10px 25px rgba(0, 120, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.card-shadow {
+    box-shadow: 0 10px 30px rgba(0, 120, 255, 0.08);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+}
+
+.tab-pane {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-pane.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+}
+
+.accordion-item.open .accordion-content {
+    max-height: 300px;
+    transition: max-height 0.35s cubic-bezier(1, 0, 1, 0);
+}
+
+.accordion-item.open .accordion-icon {
+    transform: rotate(180deg);
+}
